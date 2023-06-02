@@ -1,15 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="container-fluid">
+    <CharacterCreator />
+    <CharacterList :characters="characters" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import CharacterCreator from "./components/CharacterCreator.vue";
+import CharacterList from "./components/CharacterList.vue";
 
 export default {
-  name: "App",
   components: {
-    HelloWorld,
+    CharacterCreator,
+    CharacterList,
+  },
+  data() {
+    return {
+      characters: [
+        {
+          _id: 1,
+          name: "TestCharacter 1",
+          race: "Human",
+          class: "Warrior",
+        },
+        {
+          _id: 1,
+          name: "TestCharacter 2",
+          race: "Human",
+          class: "Warrior",
+        },
+        {
+          _id: 1,
+          name: "TestCharacter 3",
+          race: "Human",
+          class: "Warrior",
+        },
+      ],
+    };
   },
 };
 </script>
