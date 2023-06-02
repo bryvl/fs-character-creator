@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
-const url = 'http://localhost:3000/characters';
+const url = "http://localhost:3000/characters";
 
 export default {
-    getAllCharacters() {
-        return axios.get(url);
-    },
-    createCharacter(character) {
-        return axios.post(url, character);
-    }
+  getAllCharacters() {
+    return axios.get(url);
+  },
+  createCharacter(character) {
+    return axios.post(url, character);
+  },
 };

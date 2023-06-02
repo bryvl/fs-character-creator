@@ -13,12 +13,21 @@
 </template>
 
 <script>
+import api from "../api";
+
 export default {
-  props: {
-    characters: {
-      type: Array,
-      required: true,
-    },
+  data() {
+    return {
+      characters: [],
+    };
+  },
+  async created() {
+    try {
+      const response = await api.getAllCharacters();
+      this.characters = response.data;
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 </script>

@@ -1,45 +1,27 @@
 <template>
   <div class="row">
-    <b-form class="create-char-form col-6 offset-3" @submit="onSubmit">
-      <b-form-group
-        id="input-group-1"
-        label="Character Name:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="character.name"
-          required
-          placeholder="Enter character name"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="Race:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="character.race"
-          required
-          placeholder="Enter race"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="Class:" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          v-model="character.class"
-          required
-          placeholder="Enter class"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-button class="create-char-btn" type="submit" variant="primary">
+    <div>
+      <router-link to="/create/name">Name</router-link> |
+      <router-link to="/create/race">Race</router-link> |
+      <router-link to="/create/class">Class</router-link>
+    </div>
+    <router-view
+      :character="character"
+      @update:characterRace="handleRaceUpdate"
+    />
+    <div>
+      Name: {{ character.name }} <br />
+      Race: {{ character.race }} <br />
+      Class: {{ character.class }} <br />
+      <button :disabled="!isComplete" @click="submitCharacter">
         Create Character
-      </b-button>
-    </b-form>
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import api from "../api";
 export default {
   data() {
     return {
@@ -47,13 +29,27 @@ export default {
         name: "",
         race: "",
         class: "",
+        level: 1,
       },
     };
   },
+  computed: {
+    isComplete() {
+      return this.character.name && this.character.race && this.character.class;
+    },
+  },
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
-      this.$emit("create-character", this.character);
+      try {
+        const response = await api.createCharacter(this.character);
+        this.$emit("character-created", response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    handleRaceUpdate(race) {
+      this.character.race = race;
     },
   },
 };
@@ -63,7 +59,9 @@ export default {
 .create-char-form {
   padding: 24px;
 }
-.create-char-btn {
+.menu-btn.create-char-btn {
   margin: 12px 0px;
+  background-color: #080223;
+  border-color: #080223;
 }
 </style>
