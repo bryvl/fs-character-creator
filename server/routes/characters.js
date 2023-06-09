@@ -81,17 +81,18 @@ router.patch('/:id', getCharacter, async (req, res) => {
 });
 
 
-
-
-router.delete('/:id', getCharacter, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        await res.character.remove();
+        const character = await Character.findOneAndDelete({ _id: req.params.id });
+        if (!character) {
+            return res.status(404).json({ message: 'Cannot find character' });
+        }
         res.json({ message: 'Deleted Character' });
     } catch (err) {
+        console.error(err);
         res.status(500).json({ message: err.message });
     }
 });
-
 
 
 module.exports = router;

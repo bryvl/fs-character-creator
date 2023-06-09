@@ -7,6 +7,7 @@
         :key="character._id"
       >
         {{ character.name }} - {{ character.race }} - {{ character.class }}
+        <button @click="deleteCharacter(character._id)">Delete</button>
       </b-list-group-item>
     </b-list-group>
   </div>
@@ -28,6 +29,19 @@ export default {
     } catch (error) {
       console.error(error);
     }
+  },
+  methods: {
+    async deleteCharacter(id) {
+      try {
+        await api.deleteCharacter(id);
+
+        this.characters = this.characters.filter(
+          (character) => character._id !== id
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    },
   },
 };
 </script>

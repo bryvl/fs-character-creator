@@ -13,6 +13,7 @@ import {
   BListGroup,
   BListGroupItem,
   BFormSelect,
+  BModal,
 } from "bootstrap-vue-next";
 
 const app = createApp(App);
@@ -28,5 +29,6 @@ app.component("BButton", BButton);
 app.component("BListGroup", BListGroup);
 app.component("BListGroupItem", BListGroupItem);
 app.component("BFormSelect", BFormSelect);
+app.component("BModal", BModal);
 
 app.mount("#app");

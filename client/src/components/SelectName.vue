@@ -1,29 +1,43 @@
-<!-- Name.vue -->
 <template>
   <div>
-    <h1>What is your name, Voyager?</h1>
-    <b-form @submit="onSubmit">
-      <b-form-group id="input-group-1" label-for="input-1">
-        <b-form-input
-          id="input-1"
-          v-model="character.name"
-          required
-          placeholder="Enter character name"
-        ></b-form-input>
-      </b-form-group>
-      <b-button type="submit" variant="primary">Next</b-button>
+    <h1>Enter your name:</h1>
+    <b-form @submit.prevent="submitName">
+      <b-form-input
+        id="input-name"
+        v-model="selectedName"
+        required
+      ></b-form-input>
+      <b-button type="submit">Submit</b-button>
     </b-form>
+    <div v-if="confirmingName">
+      Your name is {{ selectedName }}. Is that right?
+      <b-button @click="confirmName"> Yes, that's correct </b-button>
+      <b-button @click="cancelName"> No, let me change it </b-button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["character"],
   data() {
     return {
-      character: {
-        name: "",
-      },
+      selectedName: this.character.name,
+      confirmingName: false,
     };
+  },
+  methods: {
+    submitName(event) {
+      event.preventDefault();
+      this.confirmingName = true;
+    },
+    cancelName() {
+      this.confirmingName = false;
+    },
+    confirmName() {
+      this.$emit("update:characterName", this.selectedName);
+      this.confirmingName = false;
+    },
   },
 };
 </script>

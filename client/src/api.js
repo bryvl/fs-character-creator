@@ -9,4 +9,7 @@ export default {
   createCharacter(character) {
     return axios.post(url, character);
   },
+  deleteCharacter(id) {
+    return axios.delete(`${url}/${id}`);
+  },
 };

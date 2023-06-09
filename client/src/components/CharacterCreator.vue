@@ -1,13 +1,15 @@
 <template>
   <div class="row">
     <div>
-      <router-link to="/create/name">Name</router-link> |
       <router-link to="/create/race">Race</router-link> |
-      <router-link to="/create/class">Class</router-link>
+      <router-link to="/create/class">Class</router-link> |
+      <router-link to="/create/name">Name</router-link>
     </div>
     <router-view
       :character="character"
       @update:characterRace="handleRaceUpdate"
+      @update:characterName="handleNameUpdate"
+      @update:characterClass="handleClassUpdate"
     />
     <div>
       Name: {{ character.name }} <br />
@@ -39,7 +41,7 @@ export default {
     },
   },
   methods: {
-    async onSubmit(event) {
+    async submitCharacter(event) {
       event.preventDefault();
       try {
         const response = await api.createCharacter(this.character);
@@ -48,8 +50,14 @@ export default {
         console.error(error);
       }
     },
+    handleNameUpdate(name) {
+      this.character.name = name;
+    },
     handleRaceUpdate(race) {
       this.character.race = race;
+    },
+    handleClassUpdate(charClass) {
+      this.character.class = charClass;
     },
   },
 };
