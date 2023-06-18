@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="game-header">Dark Seas</h1>
+    <h1 class="game-header">Dashboard</h1>
     <div class="row">
       <div class="col-12">
         <b-button class="menu-btn" @click="navigateToCharacterCreator"
@@ -9,6 +9,7 @@
         <b-button class="menu-btn" @click="navigateToCharacterList"
           >Load Existing Character</b-button
         >
+        <b-button class="menu-btn" @click="continueCampaign">Continue</b-button>
       </div>
     </div>
   </div>
@@ -19,10 +20,23 @@ export default {
   components: {},
   methods: {
     navigateToCharacterCreator() {
-      this.$router.push("/create");
+      const userId = this.$route.params.userId;
+      // console.log(userId);
+      this.$router.push({
+        name: "CharacterCreator",
+        params: { userId },
+      });
     },
     navigateToCharacterList() {
-      this.$router.push("/character-select");
+      const userId = this.$route.params.userId;
+      // console.log(userId);
+      this.$router.push({
+        name: "CharacterSelect",
+        params: { userId },
+      });
+    },
+    continueCampaign() {
+      console.log("Continuing Campaign");
     },
   },
 };
@@ -34,12 +48,14 @@ export default {
 }
 .game-header {
   padding: 64px 0px;
+  font-size: 2.5em;
 }
 .menu-btn {
-  margin: 6px;
-  padding: 24px 12px;
+  display: block;
+  margin: 12px auto;
+  padding: 12px;
+  width: 50%;
   background-color: #080223;
   border-color: #080223;
-  visibility: hidden;
 }
 </style>

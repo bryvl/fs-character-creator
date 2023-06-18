@@ -25,7 +25,8 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         race: req.body.race,
         class: req.body.class,
-        level: req.body.level
+        level: req.body.level,
+        userId: req.body.userId
     });
 
     try {
@@ -37,15 +38,15 @@ router.post('/', async (req, res) => {
 });
 
 
-// Get Routes
+// Get Routes for User-specific characters
 router.get('/', async (req, res) => {
     try {
-        const characters = await Character.find();
-        res.json(characters);
+      const characters = await Character.find({ userId: req.query.userId });
+      res.json(characters);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+      res.status(500).json({ message: err.message });
     }
-});
+  });
 router.get('/:id', async (req, res) => {
     try {
         const character = await Character.findById(req.params.id);
@@ -57,6 +58,12 @@ router.get('/:id', async (req, res) => {
         return res.status(500).json({ message: err.message });
     }
 });
+router.get('/create/:userId', (req, res) => {
+    // Render the character creation form with the user ID
+    res.render('character-create', { userId: req.params.userId });
+});
+
+
 
 // Edit specific character
 router.patch('/:id', getCharacter, async (req, res) => {
@@ -80,7 +87,7 @@ router.patch('/:id', getCharacter, async (req, res) => {
     }
 });
 
-
+// Delete specific character
 router.delete('/:id', async (req, res) => {
     try {
         const character = await Character.findOneAndDelete({ _id: req.params.id });

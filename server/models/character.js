@@ -4,7 +4,8 @@ const characterSchema = new mongoose.Schema({
     name: String,
     race: String,
     class: String,
-    level: Number
+    level: Number,
+    userId: String
 });
 
 const Character = mongoose.model('Character', characterSchema);

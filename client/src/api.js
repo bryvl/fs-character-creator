@@ -6,8 +6,12 @@ export default {
   getAllCharacters() {
     return axios.get(url);
   },
-  createCharacter(character) {
-    return axios.post(url, character);
+  // Fetch only the characters associated with the logged-in user
+  getUserCharacters(userId) {
+    return axios.get(`${url}?userId=${userId}`);
+  },
+  createCharacter(character, userId) {
+    return axios.post(`${url}?userId=${userId}`, character);
   },
   deleteCharacter(id) {
     return axios.delete(`${url}/${id}`);

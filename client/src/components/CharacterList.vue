@@ -24,7 +24,9 @@ export default {
   },
   async created() {
     try {
-      const response = await api.getAllCharacters();
+      const userId = this.$route.params.userId;
+
+      const response = await api.getUserCharacters(userId);
       this.characters = response.data;
     } catch (error) {
       console.error(error);

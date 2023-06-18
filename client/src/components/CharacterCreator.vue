@@ -1,9 +1,17 @@
 <template>
   <div class="row">
     <div>
-      <router-link to="/create/race">Race</router-link> |
-      <router-link to="/create/class">Class</router-link> |
-      <router-link to="/create/name">Name</router-link>
+      <router-link :to="`/create/${$route.params.userId}/race`"
+        >Race</router-link
+      >
+      |
+      <router-link :to="`/create/${$route.params.userId}/class`"
+        >Class</router-link
+      >
+      |
+      <router-link :to="`/create/${$route.params.userId}/name`"
+        >Name</router-link
+      >
     </div>
     <router-view
       :character="character"
@@ -32,6 +40,7 @@ export default {
         race: "",
         class: "",
         level: 1,
+        userId: this.$route.params.userId,
       },
     };
   },
@@ -44,8 +53,13 @@ export default {
     async submitCharacter(event) {
       event.preventDefault();
       try {
-        const response = await api.createCharacter(this.character);
+        const userId = this.$route.params.userId;
+        const response = await api.createCharacter(this.character, this.userId);
         this.$emit("character-created", response.data);
+        this.$router.push({
+          name: "CharacterSelect",
+          params: { userId },
+        });
       } catch (error) {
         console.error(error);
       }

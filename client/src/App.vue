@@ -1,26 +1,31 @@
 <template>
   <div id="app" class="container-fluid">
     <div class="row">
-      <router-view />
+      <div class="col-12">
+        <Navigation />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import CharacterCreator from "./components/CharacterCreator.vue";
-// import CharacterList from "./components/CharacterList.vue";
-// import HomeScreen from "./components/HomeScreen.vue";
+import Navigation from "./components/Navigation/NavHeader.vue";
 
 export default {
   name: "App",
+  components: {
+    Navigation,
+  },
 };
 </script>
 
 <style>
 #app {
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   height: 100vh;
   background-color: #1d2c47;
   color: #e1e2ee;
@@ -28,5 +33,9 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+#app .row > * {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 </style>
