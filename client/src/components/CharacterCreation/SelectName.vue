@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Enter your name:</h1>
+  <div class="char-creator--form">
+    <h2>Enter your name:</h2>
     <b-form @submit.prevent="submitName">
       <b-form-input
         id="input-name"

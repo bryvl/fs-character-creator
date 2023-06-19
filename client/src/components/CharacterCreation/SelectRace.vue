@@ -1,9 +1,10 @@
 <template>
-  <h1>Choose Your Class:</h1>
-  <b-form>
+  <h2>Choose Your Race:</h2>
+  <b-form class="char-creator--form">
     <b-form-group>
       <b-form-select
-        v-model="selectedClass"
+        id="race-select"
+        v-model="selectedRace"
         :options="options"
         required
       ></b-form-select>
@@ -16,16 +17,16 @@ export default {
   props: ["character"],
   data() {
     return {
-      options: ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"],
+      options: ["Human", "Avia", "Praenobis", "Simulacra"],
     };
   },
   computed: {
-    selectedClass: {
+    selectedRace: {
       get() {
-        return this.character.class;
+        return this.character.race;
       },
       set(value) {
-        this.$emit("update:characterClass", value);
+        this.$emit("update:characterRace", value);
       },
     },
   },

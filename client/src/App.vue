@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="container-fluid">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 navbar-wrapper">
         <Navigation />
       </div>
     </div>
-    <div class="row">
+    <div class="row content-row">
       <div class="col-12">
         <router-view />
       </div>
@@ -34,8 +34,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-#app .row > * {
+#app .row > .col-12.navbar-wrapper {
   padding-left: 0px;
   padding-right: 0px;
+}
+.content-row {
+  padding: 12px;
 }
 </style>
