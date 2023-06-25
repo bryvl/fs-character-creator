@@ -2,11 +2,12 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-// import GAuth from "vue3-google-oauth2";
+import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap-vue/dist/bootstrap-vue.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue-next/dist/bootstrap-vue-next.css";
-// import { BootstrapVue, IconsPlugin } from "bootstrap-vue-next";
 import {
   BForm,
   BFormGroup,
@@ -23,8 +24,6 @@ const app = createApp(App);
 
 app.use(store);
 app.use(router);
-// app.use(BootstrapVue);
-// app.use(IconsPlugin);
 
 app.component("BForm", BForm);
 app.component("BFormGroup", BFormGroup);

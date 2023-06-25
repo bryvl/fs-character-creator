@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       options: gamePaths.map((gamePath) => gamePath.pathName),
+      selectedPathStats: gamePaths.map((gamePath) => gamePath.pathBaseStats),
     };
   },
   computed: {

@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     const character = new Character({
         name: req.body.name,
         race: req.body.race,
-        class: req.body.class,
+        path: req.body.path,
         level: req.body.level,
         userId: req.body.userId
     });
@@ -73,8 +73,8 @@ router.patch('/:id', getCharacter, async (req, res) => {
     if (req.body.race != null) {
         res.character.race = req.body.race;
     }
-    if (req.body.class != null) {
-        res.character.class = req.body.class;
+    if (req.body.path != null) {
+        res.character.path = req.body.path;
     }
     if (req.body.level != null) {
         res.character.level = req.body.level;

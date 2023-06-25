@@ -17,7 +17,7 @@ export default {
   props: ["character"],
   data() {
     return {
-      options: ["Human", "Avia", "Praenobis", "Simulacra"],
+      options: ["Human", "Avium", "Praenobis", "Simulacra"],
     };
   },
   computed: {

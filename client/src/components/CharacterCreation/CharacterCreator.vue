@@ -25,16 +25,10 @@
             <p class="info-display--path-desc">
               {{ getPathDescription(this.character.path) }}
             </p>
-            <div class="info-display--stats">
-              <span
-                v-for="(item, stat) in gamePaths[0].pathBaseStats"
-                :key="stat"
-                class="stats--stat-span"
-              >
-                <span>{{ stat }} </span>:
-                <span>{{ item }}</span>
-              </span>
-            </div>
+            <div
+              class="info-display--stats"
+              v-html="getPathBaseStats(this.character.path)"
+            ></div>
           </div>
         </div>
         <div class="col-12 char-creator--form">
@@ -50,6 +44,7 @@
         v-if="isReviewRoute"
         :disabled="!isComplete"
         @click="submitCharacter"
+        class="create-char-btn"
       >
         Create Character
       </b-button>
@@ -76,6 +71,7 @@ export default {
         name: "",
         race: "",
         path: "",
+        baseStats: "",
         level: 1,
         userId: this.$route.params.userId,
       },
@@ -144,7 +140,12 @@ export default {
       const path = this.gamePaths.find(
         (path) => path.pathName === selectedPath
       );
-      return path ? path.pathBaseStats : "";
+      const baseStats = path ? path.pathBaseStats : {};
+      return Object.entries(baseStats)
+        .map(([stat, value]) => {
+          return `<span class="stat-pair"><span class="stat-pair--name">${stat}:</span> <span class="stat-pair--baseValue">${value}</span></span>`;
+        })
+        .join(" ");
     },
   },
   components: { SelectImgDisplay },
@@ -153,7 +154,7 @@ export default {
 
 <style>
 .menu-btn.create-char-btn {
-  margin: 12px 0px;
+  margin: 12px;
   background-color: #080223;
   border-color: #080223;
 }
@@ -236,5 +237,18 @@ form .btn {
   margin: 12px 0px;
   background-color: #080223;
   border-color: #080223;
+}
+
+.info-display--stats {
+  padding: 24px 0px;
+  border-top: 1px solid #292929;
+  min-height: 100px;
+}
+.stat-pair {
+  margin: 12px;
+}
+.stat-pair--name {
+  text-transform: capitalize;
+  font-weight: bold;
 }
 </style>

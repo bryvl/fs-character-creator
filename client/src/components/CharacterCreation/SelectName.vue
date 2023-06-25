@@ -11,8 +11,14 @@
     </b-form>
     <div v-if="confirmingName">
       Your name is {{ selectedName }}. Is that right?
-      <b-button @click="confirmName"> Yes, that's correct </b-button>
-      <b-button @click="cancelName"> No, let me change it </b-button>
+      <div class="char-creator--confirm-name">
+        <b-button class="create-char-btn" @click="confirmName">
+          Yes, that's correct
+        </b-button>
+        <b-button class="create-char-btn" @click="cancelName">
+          No, let me change it
+        </b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -41,3 +47,8 @@ export default {
   },
 };
 </script>
+<style>
+.create-char-btn {
+  margin: 12px;
+}
+</style>
